@@ -128,7 +128,7 @@ public class Messenger extends Activity {
     }
 
     private void sendMessage(String text) {
-        Connector.sendMessage(text);
+        Connector.sendMessage(text.trim());
     }
 
     public void displayServerMessage(String text) {

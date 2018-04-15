@@ -2,7 +2,7 @@ package ChillChat.Client;
 
 import javafx.scene.image.Image;
 
-import java.io.File;
+import java.io.*;
 import java.util.Random;
 
 public class Utils {
@@ -34,6 +34,29 @@ public class Utils {
 
         return resultFile;
 
+    }
+
+    public static String loadIP() {
+        String IP = "";
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("config/settings.txt")));
+            IP = reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return IP;
+    }
+
+    public static int loadPORT() {
+        String PORT = "";
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("config/settings.txt")));
+            reader.readLine();
+            PORT = reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Integer.parseInt(PORT);
     }
 
 }

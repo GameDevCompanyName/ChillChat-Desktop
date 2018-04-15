@@ -24,7 +24,7 @@ public class ClientMethods {
         Connector.roomId = roomId;
         Connector.roomName = roomName;
         Connector.cleanMessageHistory();
-        Connector.displayServerMessage("Вы присоединились к комнате \"" + roomId + "\"");
+        Connector.displayServerMessage("Вы присоединились к комнате \"" + roomName + "\"");
     }
 
     public static void userRegistrationSuccessReceived(){

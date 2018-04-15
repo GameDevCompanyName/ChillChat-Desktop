@@ -145,6 +145,8 @@ public class Connector {
     public static void disconnectedByReason(String reason) {
         if (messenger != null)
             messenger.disconnectedByReason(reason);
+        dropAllTheConnection();
+        manager.goBack();
     }
 
     public static void userConnectedRecieved(String login) {
@@ -155,10 +157,11 @@ public class Connector {
     public static void userDisconnectedRecieved(String login) {
         if (messenger != null)
             messenger.displayUserDisconnected(login);
+
     }
 
     public static void sendPong() {
-
+        send(ClientMessage.userPong());
     }
 
     public static void sendRoomChangeRequest(String roomId) {
