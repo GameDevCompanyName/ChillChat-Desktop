@@ -1,6 +1,6 @@
-package ChillChat.Client.VisualElements;
+package ChillChat.Client.VisualElements.Elements;
 
-import ChillChat.Client.Network.Connector;
+import ChillChat.Client.Connector;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -216,5 +216,8 @@ public class CustomConsole {
         selectedMessages.clear();
     }
 
+    public void cleanMessageHistory() {
+        textBox.getChildren().clear();
+    }
 }
 

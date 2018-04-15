@@ -6,18 +6,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Date;
 
-class Resender extends Thread {
+import static ChillChat.Client.Constants.DEBUG;
+
+public class Resender extends Thread {
 
     private boolean stoped = false;
 
     private BufferedReader in;
 
-    Resender(BufferedReader in) {
+    public Resender(BufferedReader in) {
         setName("Resender");
         this.in = in;
     }
 
-    void setStop() {
+    public void setStop() {
 
         stoped = true;
         try {
@@ -35,11 +37,13 @@ class Resender extends Thread {
 
             try {
                 String message = in.readLine();
-                System.out.println("прочитал сообщение");
+                if (DEBUG)
+                    System.out.println("прочитал сообщение");
                 if (!stoped)
                     Platform.runLater(() -> ClientMessage.read(message));
             } catch (IOException e) {
-                System.out.println("Выключение входного потока");
+                if (DEBUG)
+                    System.out.println("Выключение входного потока");
             }
 
 

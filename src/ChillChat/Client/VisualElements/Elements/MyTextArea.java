@@ -1,4 +1,4 @@
-package ChillChat.Client.VisualElements;
+package ChillChat.Client.VisualElements.Elements;
 
 import ChillChat.Client.VisualElements.Activities.Messenger;
 import javafx.geometry.Bounds;

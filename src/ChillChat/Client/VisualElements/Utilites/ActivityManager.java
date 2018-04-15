@@ -1,6 +1,7 @@
-package ChillChat.Client.VisualElements;
+package ChillChat.Client.VisualElements.Utilites;
 
 import ChillChat.Client.VisualElements.Activities.Activity;
+import ChillChat.Client.VisualElements.CustomWindow;
 import ChillChat.Client.VisualElements.Utilites.AnimationType;
 import javafx.geometry.Insets;
 import javafx.scene.layout.StackPane;

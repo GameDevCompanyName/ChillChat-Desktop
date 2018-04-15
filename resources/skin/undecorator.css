@@ -11,7 +11,7 @@
     Currently a Rectangle node
 */
 .decoration-background{
-    -fx-fill: rgba(50,30,37,0.95);
+    -fx-fill: rgba(20,20,32,0.95);
     -fx-stroke-width: 0;
     -fx-arc-width:20px;
     -fx-arc-height:20px;

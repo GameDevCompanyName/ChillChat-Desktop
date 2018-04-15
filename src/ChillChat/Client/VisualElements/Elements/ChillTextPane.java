@@ -1,4 +1,4 @@
-package ChillChat.Client.VisualElements;
+package ChillChat.Client.VisualElements.Elements;
 
 import ChillChat.Client.VisualElements.Activities.Messenger;
 import javafx.animation.FadeTransition;
@@ -69,6 +69,8 @@ public class ChillTextPane extends StackPane {
     public void changeColor(String color){
 
         final String webColorString;
+
+        System.out.println("ПЫТАЮСЬ УСТАНОВИТЬ ЦВЕТ " + color);
 
         switch (color){
             case "1":

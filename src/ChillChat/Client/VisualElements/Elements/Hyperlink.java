@@ -1,4 +1,4 @@
-package ChillChat.Client.VisualElements;
+package ChillChat.Client.VisualElements.Elements;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;

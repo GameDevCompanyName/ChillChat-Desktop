@@ -1,10 +1,10 @@
 package ChillChat.Client.VisualElements.Activities;
 
-import ChillChat.Client.Network.ClientMessage;
-import ChillChat.Client.Network.Connector;
-import ChillChat.Client.VisualElements.ActivityManager;
-import ChillChat.Client.VisualElements.ChillTextPane;
-import ChillChat.Client.VisualElements.CustomConsole;
+import ChillChat.Client.Connector;
+import ChillChat.Client.VisualElements.Utilites.ActivityManager;
+import ChillChat.Client.VisualElements.Elements.ChillTextPane;
+import ChillChat.Client.VisualElements.Elements.CustomConsole;
+import ChillChat.Client.VisualElements.Utilites.AnimationType;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -33,9 +33,15 @@ public class Messenger extends Activity {
         super(activityManager);
 
         this.setOnKeyPressed(event -> {
+
             if (event.getCode().equals(KeyCode.DELETE)){
                 console.deleteSelectedMessages();
             }
+
+            if (event.getCode().equals(KeyCode.INSERT)){
+                activityManager.goTo(new RoomChanger(activityManager), AnimationType.SLIDE);
+            }
+
         });
 
         messengerBox = new VBox();
@@ -146,4 +152,7 @@ public class Messenger extends Activity {
         console.serverMessageAppend(login + " отключился.");
     }
 
+    public void cleanMessageHistory() {
+        console.cleanMessageHistory();
+    }
 }

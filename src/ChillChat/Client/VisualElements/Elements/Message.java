@@ -1,6 +1,6 @@
-package ChillChat.Client.VisualElements;
+package ChillChat.Client.VisualElements.Elements;
 
-import ChillChat.Client.Network.Connector;
+import ChillChat.Client.Connector;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -70,8 +70,8 @@ public class Message extends StackPane {
         this.senderColor = senderColor;
         colorize(senderColor);
 
-        Color defaultColor = Color.color(nameColor.getRed(), nameColor.getGreen(), nameColor.getBlue(), 0.1);
-        Color selectedColor = Color.color(0.15, 0.25, 0.85, 0.4);
+        Color defaultColor = Color.color(nameColor.getRed(), nameColor.getGreen(), nameColor.getBlue(), 0.15);
+        Color selectedColor = Color.color(0.15, 0.25, 0.85, 0.35);
 
         backColor = defaultColor;
         selectedBackColor = selectedColor;
@@ -89,6 +89,8 @@ public class Message extends StackPane {
 
     public Message(String senderName, MessageType type){
 
+        loadFonts();
+
         this.setAlignment(Pos.TOP_LEFT);
 
         this.content = new VBox();
@@ -102,8 +104,8 @@ public class Message extends StackPane {
         this.senderColor = "9";
         colorize(senderColor);
 
-        Color defaultColor = Color.color(nameColor.getRed(), nameColor.getGreen(), nameColor.getBlue(), 0.15);
-        Color selectedColor = Color.color(0.15, 0.25, 0.85, 0.4);
+        Color defaultColor = Color.color(nameColor.getRed(), nameColor.getGreen(), nameColor.getBlue(), 0.35);
+        Color selectedColor = Color.color(0.15, 0.25, 0.85, 0.7);
 
         backColor = defaultColor;
         selectedBackColor = selectedColor;

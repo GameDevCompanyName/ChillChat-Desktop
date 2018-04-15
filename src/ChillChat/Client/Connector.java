@@ -1,9 +1,11 @@
-package ChillChat.Client.Network;
+package ChillChat.Client;
 
+import ChillChat.Client.Network.ClientMessage;
+import ChillChat.Client.Network.Resender;
 import ChillChat.Client.VisualElements.Activities.Messenger;
 import ChillChat.Client.VisualElements.Activities.Settings;
-import ChillChat.Client.VisualElements.ActivityManager;
-import ChillChat.Client.VisualElements.LogIn;
+import ChillChat.Client.VisualElements.Utilites.ActivityManager;
+import ChillChat.Client.VisualElements.Activities.LogIn;
 import ChillChat.Client.VisualElements.Utilites.AnimationType;
 import javafx.application.Application;
 
@@ -18,6 +20,7 @@ public class Connector {
     public static boolean connected = false;
     public static boolean loggedIn = false;
     public static String roomId = "null";
+    public static String roomName = "null";
     public static String name = "null";
     public static String myColor = "null";
 
@@ -106,10 +109,12 @@ public class Connector {
     public static void loginSuccess() {
         Messenger messenger = new Messenger(manager);
         manager.goTo(messenger, AnimationType.SLIDE);
+        roomId = "0";
+        roomName = "Главная";
     }
 
     public static void userColorRecieved(String login, String color) {
-        if (login == name){
+        if (login.equals(name)){
             myColor = color;
             updateInterfaceColor();
         }
@@ -154,5 +159,14 @@ public class Connector {
 
     public static void sendPong() {
 
+    }
+
+    public static void sendRoomChangeRequest(String roomId) {
+        send(ClientMessage.roomChangeRequestSend(roomId));
+    }
+
+    public static void cleanMessageHistory() {
+        if (messenger != null)
+            messenger.cleanMessageHistory();
     }
 }

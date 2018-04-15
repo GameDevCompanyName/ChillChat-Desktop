@@ -1,5 +1,7 @@
 package ChillChat.Client.Network;
 
+import ChillChat.Client.Connector;
+
 public class ClientMethods {
 
     public static void clientVersionRequestReceived(){
@@ -16,6 +18,13 @@ public class ClientMethods {
 
     public static void loginSuccessReceived(){
         Connector.loginSuccess();
+    }
+
+    public static void userRoomChanged(String roomId, String roomName){
+        Connector.roomId = roomId;
+        Connector.roomName = roomName;
+        Connector.cleanMessageHistory();
+        Connector.displayServerMessage("Вы присоединились к комнате \"" + roomId + "\"");
     }
 
     public static void userRegistrationSuccessReceived(){

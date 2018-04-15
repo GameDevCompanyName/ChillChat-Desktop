@@ -4,11 +4,11 @@ public class Constants {
 
     public static final String DESKTOP_VERSION = "JC0.1";
 
-    public static final String IP = "192.168.10.142";
-    public static final int PORT = 16261;
+//    public static final String IP = "192.168.10.142";
+//    public static final int PORT = 16261;
 
-//    public static final String IP = "138.68.74.16";
-//    public static final int PORT = 1488;
+    public static final String IP = "138.68.74.16";
+    public static final int PORT = 1488;
 
     //public static final String IP = "localhost";
     //public static final int PORT = 1488;
@@ -17,7 +17,7 @@ public class Constants {
     //LOGO = 5
     //LOGIN = 2.5
 
-    public final static Double LOGO_SHOW_TIME = 2.0;
+    public final static Double LOGO_SHOW_TIME = 2.5;
     public final static Double LOGIN_FADE_TIME = 1.5;
 
     public final static Double ACTIVITY_CHANGE_TIME = 1.5;

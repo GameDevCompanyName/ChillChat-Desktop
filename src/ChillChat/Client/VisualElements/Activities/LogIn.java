@@ -1,8 +1,8 @@
-package ChillChat.Client.VisualElements;
+package ChillChat.Client.VisualElements.Activities;
 
-import ChillChat.Client.Network.Connector;
+import ChillChat.Client.Connector;
 import ChillChat.Client.Utils;
-import ChillChat.Client.VisualElements.Activities.Activity;
+import ChillChat.Client.VisualElements.Utilites.ActivityManager;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

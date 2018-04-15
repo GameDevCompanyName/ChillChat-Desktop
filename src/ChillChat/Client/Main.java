@@ -1,7 +1,6 @@
 package ChillChat.Client;
 
-import ChillChat.Client.Network.Connector;
-import ChillChat.Client.VisualElements.ActivityManager;
+import ChillChat.Client.VisualElements.Utilites.ActivityManager;
 import ChillChat.Client.VisualElements.CustomWindow;
 import ChillChat.Client.VisualElements.Activities.Intro;
 import ChillChat.Client.VisualElements.Utilites.AnimationType;
@@ -23,7 +22,7 @@ public class Main extends Application {
         Connector.manager = manager;
 
         Intro intro = new Intro(manager);
-        manager.goTo(intro, AnimationType.SLIDE);
+        manager.goTo(intro, AnimationType.FADE);
 
         primaryStage.getScene().setOnKeyPressed(event -> {
             if (event.getCode().equals(KeyCode.ESCAPE)){

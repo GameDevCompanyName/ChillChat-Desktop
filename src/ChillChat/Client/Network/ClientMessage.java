@@ -15,7 +15,8 @@ public class ClientMessage {
         if (input == null)
             return;
         JSONObject incomingMessage = (JSONObject) JSONValue.parse(input);
-        System.out.println(incomingMessage);
+        if (DEBUG)
+            System.out.println(incomingMessage);
         String methodName = (String) incomingMessage.get("type");
 
         switch (methodName){
@@ -70,6 +71,11 @@ public class ClientMessage {
             case "ping":
                 ClientMethods.serverPingRequest();
                 break;
+            case "userChangedRoom":
+                ClientMethods.userRoomChanged(
+                        incomingMessage.get("first").toString(),
+                        incomingMessage.get("second").toString()
+                );
         }
 
     }
@@ -107,6 +113,13 @@ public class ClientMessage {
     public static String userPong() {
         JSONObject object = new JSONObject();
         object.put("type", "pong");
+        return object.toJSONString();
+    }
+
+    public static String roomChangeRequestSend(String roomId) {
+        JSONObject object = new JSONObject();
+        object.put("type", "joinRoom");
+        object.put("first", roomId);
         return object.toJSONString();
     }
 }

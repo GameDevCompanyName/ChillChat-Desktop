@@ -1,6 +1,7 @@
 package ChillChat.Client.VisualElements;
 
-import ChillChat.Client.Network.Connector;
+import ChillChat.Client.Connector;
+import ChillChat.Client.VisualElements.Utilites.ActivityManager;
 import insidefx.undecorator.Undecorator;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -38,9 +39,15 @@ public class CustomWindow extends Application {
         scene = new Scene(undecorator);
         scene.setFill(Color.TRANSPARENT);
         scene.getStylesheets().add("skin/undecorator.css");
+        scene.getStylesheets().add("test-style.css");
 
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        primaryStage.setOnCloseRequest(event -> {
+            Connector.dropAllTheConnection();
+            undecorator.setFadeOutTransition();
+        });
 
     }
 

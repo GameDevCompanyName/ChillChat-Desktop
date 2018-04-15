@@ -1,7 +1,6 @@
 package ChillChat.Client.VisualElements.Activities;
 
-import ChillChat.Client.VisualElements.ActivityManager;
-import ChillChat.Client.VisualElements.LogIn;
+import ChillChat.Client.VisualElements.Utilites.ActivityManager;
 import javafx.animation.FadeTransition;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
