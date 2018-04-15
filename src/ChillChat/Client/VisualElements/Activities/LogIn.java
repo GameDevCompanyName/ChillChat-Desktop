@@ -39,6 +39,8 @@ public class LogIn extends Activity {
     public LogIn(ActivityManager activityManager) {
         super(activityManager);
 
+        Connector.logIn = this;
+
         this.setOnKeyPressed(event -> {
             if (event.getCode().equals(KeyCode.ENTER)){
                 tryToLogIn();
@@ -131,6 +133,38 @@ public class LogIn extends Activity {
 
     }
 
+    private void smoothAppear(VBox box, double v) {
+
+    }
+
+    public void wrongPass() {
+        loginState.setText("Неверный пароль");
+    }
+
+    public void disabledSymbols() {
+        loginState.setText("Запрещённые символы");
+    }
+
+    public void clearErrorField() {
+        loginState.setText("");
+    }
+
+    public void tooLongInput() {
+        loginState.setText("Пароль или логин\nслишком длинный");
+    }
+
+    public void wrongInput() {
+        loginState.setText("Некорректные данные");
+    }
+
+    public void userAlreadyExists() {
+        loginState.setText("Юзер с таким логином\nуже подключен");
+    }
+
+    public void serverIsUnavalable() {
+        loginState.setText("Соединение разорвано.");
+    }
+
     private void tryToLogIn() {
 
         Connector.dropAllTheConnection();
@@ -154,9 +188,7 @@ public class LogIn extends Activity {
         Connector.sendLogInAttempt(loginField.getText(), passwordField.getText());
 
     }
-
-    private void smoothAppear(VBox box, double v) {
-
-    }
+    
+    
 
 }

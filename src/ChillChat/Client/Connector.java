@@ -101,12 +101,18 @@ public class Connector {
     }
 
     public static void passWrongError() {
+        if (logIn != null)
+            logIn.wrongPass();
     }
 
     public static void userAlreadyOnline() {
+        if (logIn != null)
+            logIn.userAlreadyExists();
     }
 
     public static void loginSuccess() {
+        if (logIn != null)
+            logIn.clearErrorField();
         Messenger messenger = new Messenger(manager);
         manager.goTo(messenger, AnimationType.SLIDE);
         roomId = "0";
