@@ -37,10 +37,10 @@ public class Activity extends StackPane {
 
         Timeline flush = new Timeline();
 
-        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(this.scaleXProperty(), 1.0)));
-        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(this.scaleYProperty(), 1.0)));
-        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME), new KeyValue(this.scaleXProperty(), 0.8)));
-        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME), new KeyValue(this.scaleYProperty(), 0.4)));
+//        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(this.scaleXProperty(), 1.0)));
+//        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(this.scaleYProperty(), 1.0)));
+//        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME), new KeyValue(this.scaleXProperty(), 0.8)));
+//        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME), new KeyValue(this.scaleYProperty(), 0.4)));
 
         flush.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(this.opacityProperty(), 1.0)));
         flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME), new KeyValue(this.opacityProperty(), 0.0)));
@@ -79,10 +79,10 @@ public class Activity extends StackPane {
 
         Timeline appear = new Timeline();
 
-        appear.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(this.scaleXProperty(), 0.3)));
-        appear.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(this.scaleYProperty(), 0.15)));
-        appear.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME), new KeyValue(this.scaleXProperty(), 1.0)));
-        appear.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME), new KeyValue(this.scaleYProperty(), 1.0)));
+        //appear.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(this.scaleXProperty(), 0.3)));
+        //appear.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(this.scaleYProperty(), 0.15)));
+        //appear.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME), new KeyValue(this.scaleXProperty(), 1.0)));
+        //appear.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME), new KeyValue(this.scaleYProperty(), 1.0)));
 
         appear.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(this.opacityProperty(), 0.0)));
         appear.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME/1.5), new KeyValue(this.opacityProperty(), 1.0)));

@@ -11,10 +11,10 @@ public class Constants {
     //LOGO = 5
     //LOGIN = 2.5
 
-    public final static Double LOGO_SHOW_TIME = 2.5;
+    public final static Double LOGO_SHOW_TIME = 3.0;
     public final static Double LOGIN_FADE_TIME = 1.5;
 
-    public final static Double ACTIVITY_CHANGE_TIME = 1.5;
+    public final static Double ACTIVITY_CHANGE_TIME = 0.8;
 
     public final static Double TEXT_DISAPPEAR_TIME = 0.135;
     public final static Double TEXT_APPEAR_TIME = 0.25;

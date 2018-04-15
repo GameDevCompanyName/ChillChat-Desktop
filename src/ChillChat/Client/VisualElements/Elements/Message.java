@@ -23,6 +23,7 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import static ChillChat.Client.Constants.*;
@@ -155,15 +156,19 @@ public class Message extends StackPane {
     }
 
     public static void loadFonts(){
-        try {
-            //commonFont = new Font("Courier New", 12);
-            commonFont = Font.loadFont(new FileInputStream(new File("resources/commonFont.ttf")), 16);
-            nameFont = Font.loadFont(new FileInputStream(new File("resources/nameFont.ttf")), 14);
-            serverNameFont = Font.loadFont(new FileInputStream(new File("resources/nameFont.ttf")), 16);
-            serverTextFont = Font.loadFont(new FileInputStream(new File("resources/nameFont.ttf")), 13);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+        //commonFont = new Font("Courier New", 12);
+//            commonFont = Font.loadFont(new FileInputStream(new File("resources/commonFont.ttf")), 16);
+//        try {
+//            nameFont = Font.loadFont(new FileInputStream(new File("resources/commonFont.ttf")), 20);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//            serverNameFont = Font.loadFont(new FileInputStream(new File("resources/nameFont.ttf")), 16);
+//            serverTextFont = Font.loadFont(new FileInputStream(new File("resources/nameFont.ttf")), 13);
+        commonFont = new Font("Courier New", 16);
+        nameFont = new Font("Courier New Bold", 20);
+        serverNameFont = new Font("Century Gothic Bold", 20);
+        serverTextFont = new Font("Courier New Bold", 16);
     }
 
     private void createTextFlows() {
