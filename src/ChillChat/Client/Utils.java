@@ -3,6 +3,7 @@ package ChillChat.Client;
 import javafx.scene.image.Image;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.Random;
 
 public class Utils {

@@ -38,7 +38,7 @@ public class Messenger extends Activity {
                 console.deleteSelectedMessages();
             }
 
-            if (event.getCode().equals(KeyCode.INSERT)){
+            if (event.getCode().equals(KeyCode.TAB)){
                 activityManager.goTo(new RoomChanger(activityManager), AnimationType.SLIDE);
             }
 

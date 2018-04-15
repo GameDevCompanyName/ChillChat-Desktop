@@ -134,7 +134,6 @@ public class Connector {
     public static void displayServerMessage(String message) {
         if (messenger != null)
             messenger.displayServerMessage(message);
-        updateInterfaceColor();
     }
 
     public static void userKickedRecieved(String login, String reason) {
