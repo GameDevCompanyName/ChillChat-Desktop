@@ -170,6 +170,8 @@ public class Connector {
     }
 
     public static void sendRoomChangeRequest(String roomId) {
+        if (roomId == Connector.roomId)
+            return;
         send(ClientMessage.roomChangeRequestSend(roomId));
     }
 

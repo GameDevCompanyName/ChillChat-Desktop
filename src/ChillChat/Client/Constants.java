@@ -4,8 +4,8 @@ public class Constants {
 
     public static final String DESKTOP_VERSION = "JC0.1";
 
-    public static final String IP = Utils.loadIP();
-    public static final int PORT = Utils.loadPORT();
+    public static final String IP = "138.68.74.16";
+    public static final int PORT = 1488;
 
     //at default
     //LOGO = 5

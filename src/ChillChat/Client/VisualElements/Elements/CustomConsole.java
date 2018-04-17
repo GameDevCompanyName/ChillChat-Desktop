@@ -218,6 +218,7 @@ public class CustomConsole {
 
     public void cleanMessageHistory() {
         textBox.getChildren().clear();
+        lastMessage = null;
     }
 }
 

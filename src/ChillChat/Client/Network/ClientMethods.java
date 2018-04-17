@@ -21,7 +21,7 @@ public class ClientMethods {
     }
 
     public static void userRoomChanged(String roomId, String roomName){
-        if (Connector.roomId == roomId)
+        if (Connector.roomId.equals(roomId))
             return;
         Connector.roomId = roomId;
         Connector.roomName = roomName;

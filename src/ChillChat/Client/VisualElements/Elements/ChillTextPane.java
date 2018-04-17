@@ -37,8 +37,8 @@ public class ChillTextPane extends StackPane {
         textArea.heightProperty().addListener(e -> {
             smoothResizeRectangle();
         });
-        backRect.setArcHeight(30);
-        backRect.setArcWidth(30);
+        backRect.setArcHeight(50);
+        backRect.setArcWidth(50);
         backRect.setFill(Color.rgb(10, 10, 25, 0.8));
 
         this.getChildren().addAll(backRect, textArea);

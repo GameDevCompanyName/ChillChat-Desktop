@@ -135,19 +135,16 @@ public class Message extends StackPane {
         Timeline resize = new Timeline();
 
         resize.getKeyFrames().addAll(
-                new KeyFrame(Duration.seconds(0.0), new KeyValue(backgroundRect.heightProperty(), backgroundRect.getHeight())),
-                new KeyFrame(Duration.seconds(0.0), new KeyValue(backgroundRect.widthProperty(), backgroundRect.getWidth())));
+                new KeyFrame(Duration.seconds(0.0), new KeyValue(backgroundRect.heightProperty(), backgroundRect.getHeight() - 2)),
+                new KeyFrame(Duration.seconds(0.0), new KeyValue(backgroundRect.widthProperty(), backgroundRect.getWidth() - 4)));
 
 
         resize.getKeyFrames().addAll(
-                new KeyFrame(Duration.seconds(0.1), new KeyValue(backgroundRect.heightProperty(), content.getHeight() - 1)),
-                new KeyFrame(Duration.seconds(0.1), new KeyValue(backgroundRect.widthProperty(), content.getWidth() - 8)));
+                new KeyFrame(Duration.seconds(0.001), new KeyValue(backgroundRect.heightProperty(), content.getHeight() - 4)),
+                new KeyFrame(Duration.seconds(0.001), new KeyValue(backgroundRect.widthProperty(), content.getWidth() - 6)));
 
         resize.play();
-        resize.setOnFinished(e -> {
-            if (backgroundRect.getWidth() > content.getWidth()-5)
-                smoothResizeRectangle();
-        });
+
 
     }
 
@@ -351,7 +348,7 @@ public class Message extends StackPane {
         //dropShadow.setInput(glow);
         nickname.setEffect(dropShadow);
 
-        content.setPadding(new Insets(2,11, 2, 4));
+        content.setPadding(new Insets(2,5, 2, 4));
 
         setDefaultBackground();
 

@@ -58,7 +58,7 @@ public class Messenger extends Activity {
 
 
         Glow textGlow = new Glow();
-        textGlow.setLevel(1);
+        textGlow.setLevel(0.5);
         textBlur = new GaussianBlur();
         textBlur.setRadius(0.0);
 
@@ -69,12 +69,13 @@ public class Messenger extends Activity {
 //            e.printStackTrace();
 //        }
 
-        Font inputFieldFont = new Font("Courier New", 14);
+        Font inputFieldFont = new Font("Courier New", 18);
 
         textBlur.setInput(textGlow);
 
         inputField = new ChillTextPane(inputFieldFont, this);
         inputField.prefWidthProperty().bind(this.widthProperty());
+        inputField.setEffect(textBlur);
 
         console = new CustomConsole(inputField);
 
@@ -93,7 +94,7 @@ public class Messenger extends Activity {
 
     public void flushTextFromField() {
 
-        String text = inputField.getText();
+        String text = inputField.getText().trim();
 
         if (text.isEmpty())
             return;

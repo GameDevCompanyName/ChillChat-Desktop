@@ -37,23 +37,30 @@ public class Activity extends StackPane {
 
         Timeline flush = new Timeline();
 
-//        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(this.scaleXProperty(), 1.0)));
-//        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(this.scaleYProperty(), 1.0)));
-//        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME), new KeyValue(this.scaleXProperty(), 0.8)));
-//        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME), new KeyValue(this.scaleYProperty(), 0.4)));
-
         flush.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(this.opacityProperty(), 1.0)));
         flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME), new KeyValue(this.opacityProperty(), 0.0)));
 
         flush.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(this.translateXProperty(), 0)));
 
-        if (toRight){
-            flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME), new KeyValue(this.translateXProperty(), + 1500)));
-        } else {
-            flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME), new KeyValue(this.translateXProperty(), - 1500)));
-        }
+        int k = -1;
+        if (toRight)
+            k = 1;
+
+        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 1.0), new KeyValue(this.translateXProperty(), k * 1500)));
+        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.9), new KeyValue(this.translateXProperty(), k * 1470)));
+        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.8), new KeyValue(this.translateXProperty(), k * 1410)));
+        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.7), new KeyValue(this.translateXProperty(), k * 1300)));
+        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.6), new KeyValue(this.translateXProperty(), k * 1120)));
+        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.5), new KeyValue(this.translateXProperty(), k * 950)));
+        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.4), new KeyValue(this.translateXProperty(), k * 500)));
+        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.3), new KeyValue(this.translateXProperty(), k * 200)));
+        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.2), new KeyValue(this.translateXProperty(), k * 80)));
+        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.1), new KeyValue(this.translateXProperty(), k * 30)));
+        flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.0), new KeyValue(this.translateXProperty(), k * 0.0)));
+
         flush.play();
         flush.setOnFinished(e -> activityManager.getChildren().remove(this));
+
     }
 
 
@@ -77,21 +84,26 @@ public class Activity extends StackPane {
 
         activityManager.getChildren().add(this);
 
-        Timeline appear = new Timeline();
+        int k = 1;
+        if (!fromRight)
+            k = -1;
 
-        //appear.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(this.scaleXProperty(), 0.3)));
-        //appear.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(this.scaleYProperty(), 0.15)));
-        //appear.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME), new KeyValue(this.scaleXProperty(), 1.0)));
-        //appear.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME), new KeyValue(this.scaleYProperty(), 1.0)));
+        Timeline appear = new Timeline();
 
         appear.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(this.opacityProperty(), 0.0)));
         appear.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME/1.5), new KeyValue(this.opacityProperty(), 1.0)));
 
-        if (fromRight)
-            appear.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(this.translateXProperty(), 1500)));
-        else
-            appear.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(this.translateXProperty(), -1500)));
-        appear.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME), new KeyValue(this.translateXProperty(), 0)));
+        appear.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.0), new KeyValue(this.translateXProperty(), k * 1500)));
+        appear.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.1), new KeyValue(this.translateXProperty(), k * 1470)));
+        appear.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.2), new KeyValue(this.translateXProperty(), k * 1410)));
+        appear.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.3), new KeyValue(this.translateXProperty(), k * 1300)));
+        appear.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.4), new KeyValue(this.translateXProperty(), k * 1120)));
+        appear.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.5), new KeyValue(this.translateXProperty(), k * 950)));
+        appear.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.6), new KeyValue(this.translateXProperty(), k * 500)));
+        appear.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.7), new KeyValue(this.translateXProperty(), k * 200)));
+        appear.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.8), new KeyValue(this.translateXProperty(), k * 80)));
+        appear.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.9), new KeyValue(this.translateXProperty(), k * 30)));
+        appear.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 1.0), new KeyValue(this.translateXProperty(), k * 0.0)));
 
         appear.play();
     }
