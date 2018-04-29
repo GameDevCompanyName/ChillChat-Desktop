@@ -10,7 +10,7 @@ import javafx.util.Duration;
 import static ChillChat.Client.Constants.ACTIVITY_CHANGE_TIME;
 import static ChillChat.Client.Constants.DEBUG;
 
-public class Activity extends StackPane {
+public abstract class Activity extends StackPane {
     
     ActivityManager activityManager;
 
@@ -59,7 +59,10 @@ public class Activity extends StackPane {
         flush.getKeyFrames().add(new KeyFrame(Duration.seconds(ACTIVITY_CHANGE_TIME * 0.0), new KeyValue(this.translateXProperty(), k * 0.0)));
 
         flush.play();
-        flush.setOnFinished(e -> activityManager.getChildren().remove(this));
+        flush.setOnFinished(e -> {
+            activityManager.getChildren().remove(this);
+            onClose();
+        });
 
     }
 
@@ -73,6 +76,8 @@ public class Activity extends StackPane {
     }
 
     private void appear(boolean fromRight){
+
+        onCall();
 
         if (activityManager.getChildren().contains(this))
             return;
@@ -110,6 +115,9 @@ public class Activity extends StackPane {
 
 
     public void fadeIn(){
+
+        onCall();
+
         if (activityManager.getChildren().contains(this))
             return;
 
@@ -125,6 +133,7 @@ public class Activity extends StackPane {
     }
 
     public void fadeOut(){
+
         if (!activityManager.getChildren().contains(this))
             return;
 
@@ -136,8 +145,13 @@ public class Activity extends StackPane {
         fadeIn.play();
         fadeIn.setOnFinished(event -> {
             activityManager.getChildren().remove(this);
+            onClose();
         });
 
     }
+
+    abstract public void onCall();
+
+    abstract public void onClose();
 
 }

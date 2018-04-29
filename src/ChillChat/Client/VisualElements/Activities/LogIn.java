@@ -133,6 +133,16 @@ public class LogIn extends Activity {
 
     }
 
+    @Override
+    public void onCall() {
+        Connector.dropAllTheConnection();
+    }
+
+    @Override
+    public void onClose() {
+
+    }
+
     private void smoothAppear(VBox box, double v) {
 
     }
@@ -167,7 +177,6 @@ public class LogIn extends Activity {
 
     private void tryToLogIn() {
 
-        Connector.dropAllTheConnection();
         Connector.createConnectionIfNONE();
 
         Pattern p = Pattern.compile("[^А-Яа-яA-Za-z0-9_-]");

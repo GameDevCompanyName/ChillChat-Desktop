@@ -8,6 +8,7 @@ import ChillChat.Client.VisualElements.Utilites.AnimationType;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.effect.Glow;
@@ -32,21 +33,18 @@ public class Messenger extends Activity {
 
         super(activityManager);
 
-        this.setOnKeyPressed(event -> {
+        Connector.messenger = this;
 
+        this.setOnKeyPressed(event -> {
             if (event.getCode().equals(KeyCode.DELETE)){
                 console.deleteSelectedMessages();
             }
-
             if (event.getCode().equals(KeyCode.TAB)){
                 activityManager.goTo(new RoomChanger(activityManager), AnimationType.SLIDE);
             }
-
         });
 
         messengerBox = new VBox();
-
-        Connector.messenger = this;
 
         if (DEBUG)
             messengerBox.setStyle("-fx-border-color: yellow");
@@ -69,18 +67,28 @@ public class Messenger extends Activity {
 //            e.printStackTrace();
 //        }
 
-        Font inputFieldFont = new Font("Courier New", 18);
+        Font inputFieldFont = new Font("Courier New", 14);
 
         textBlur.setInput(textGlow);
 
         inputField = new ChillTextPane(inputFieldFont, this);
-        inputField.prefWidthProperty().bind(this.widthProperty());
         inputField.setEffect(textBlur);
 
         console = new CustomConsole(inputField);
 
         messengerBox.getChildren().addAll(console.getBox(), inputField);
         this.getChildren().add(messengerBox);
+        Connector.updateInterfaceColor();
+
+    }
+
+    @Override
+    public void onCall() {
+
+    }
+
+    @Override
+    public void onClose() {
 
     }
 

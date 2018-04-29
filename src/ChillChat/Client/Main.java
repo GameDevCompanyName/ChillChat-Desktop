@@ -16,6 +16,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
+        //Connector.initConnector();
+
         CustomWindow window = new CustomWindow();
         window.start(primaryStage);
         ActivityManager manager = window.getActivityManager();
@@ -29,6 +32,7 @@ public class Main extends Application {
                 manager.goBack();
             }
         });
+
     }
 
 }

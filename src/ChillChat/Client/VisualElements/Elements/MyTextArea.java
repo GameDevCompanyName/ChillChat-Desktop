@@ -9,6 +9,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
 import static ChillChat.Client.Constants.DEBUG;
@@ -18,7 +19,7 @@ public class MyTextArea extends TextArea {
 
     Messenger messenger;
 
-    public MyTextArea(Messenger messenger){
+    public MyTextArea(Messenger messenger, StackPane pane){
 
         if (DEBUG)
             this.setStyle("-fx-border-color: Yellow");
@@ -26,6 +27,7 @@ public class MyTextArea extends TextArea {
         this.messenger = messenger;
 
         this.setMaxHeight(100);
+        this.maxWidthProperty().bind(messenger.widthProperty().subtract(3));
 
         setWrapText(true);
 

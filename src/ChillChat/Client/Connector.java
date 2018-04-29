@@ -1,17 +1,20 @@
 package ChillChat.Client;
 
 import ChillChat.Client.Network.ClientMessage;
-import ChillChat.Client.Network.Resender;
+import ChillChat.Client.Network.Handler;
 import ChillChat.Client.VisualElements.Activities.Messenger;
 import ChillChat.Client.VisualElements.Activities.Settings;
 import ChillChat.Client.VisualElements.Utilites.ActivityManager;
 import ChillChat.Client.VisualElements.Activities.LogIn;
 import ChillChat.Client.VisualElements.Utilites.AnimationType;
 import javafx.application.Application;
+import javafx.application.Platform;
+import org.jboss.netty.bootstrap.ClientBootstrap;
+import org.jboss.netty.channel.*;
+import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
 
-import java.io.*;
-import java.net.Socket;
-import java.nio.charset.Charset;
+import java.net.InetSocketAddress;
+import java.util.concurrent.Executors;
 
 import static ChillChat.Client.Constants.*;
 
@@ -26,10 +29,10 @@ public class Connector {
 
     public static Application application;
 
-    static Socket socket;
-    static BufferedReader in;
-    static PrintWriter out;
-    static Resender resender;
+    public static Channel channel;
+    public static ChannelFuture future;
+    public static ChannelFactory factory;
+    public static ClientBootstrap bootstrap;
 
     public static ActivityManager manager;
     public static Messenger messenger;
@@ -37,10 +40,17 @@ public class Connector {
     public static Settings settings;
 
     private static void send(String msg) {
+
         if (DEBUG)
             System.out.println("ОТПРАВЛЯЮ --- " + msg);
-        if (out != null)
-            out.println(msg);
+        if (connected && channel.isOpen()){
+            try {
+                channel.write(msg).await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     public static void resetConnection(){
@@ -48,21 +58,29 @@ public class Connector {
         createConnectionIfNONE();
     }
 
+
     public static void createConnectionIfNONE(){
-        if (socket == null && resender == null){
+
+        factory = new NioClientSocketChannelFactory(
+                Executors.newFixedThreadPool(1),
+                Executors.newFixedThreadPool(4)
+        );
+        bootstrap = new ClientBootstrap(factory);
+        bootstrap.setPipelineFactory(() -> Channels.pipeline(new Handler()));
+
+        if (channel == null && connected == false){
+            ChannelFuture future = bootstrap.connect(new InetSocketAddress(IP, PORT));
             try {
-                socket = new Socket(IP, PORT);
+                channel = future.await().getChannel();
                 connected = true;
-                in = new BufferedReader(new InputStreamReader(socket.getInputStream(), Charset.forName("UTF-8")));
-                out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), Charset.forName("UTF-8")), true);
-                resender = new Resender(in);
-                resender.start();
                 sendVersion();
-            } catch (IOException e) {
-                connected = false;
+            } catch (InterruptedException e) {
+                if (DEBUG)
+                    System.out.println("Не удалось создать подключение");
                 e.printStackTrace();
             }
         }
+
     }
 
     public static void sendVersion(){
@@ -83,21 +101,25 @@ public class Connector {
     }
 
     public static void dropAllTheConnection(){
+
         sendDisconnect("Завершил сессию.");
-        try {
-            if (resender != null)
-                resender.setStop();
-            if (socket != null)
-                socket.close();
-            if (in != null)
-                in.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        socket = null;
-        in = null;
-        out = null;
-        resender = null;
+        connected = false;
+
+        if (bootstrap != null)
+            Platform.runLater(() -> bootstrap.releaseExternalResources());
+        if (factory != null)
+            Platform.runLater(() -> bootstrap.releaseExternalResources());
+        if (channel != null && channel.isOpen())
+            channel.close();
+        if (future != null)
+            future.cancel();
+
+
+        future = null;
+        channel = null;
+        bootstrap = null;
+        factory = null;
+
     }
 
     public static void passWrongError() {
@@ -113,6 +135,7 @@ public class Connector {
     public static void loginSuccess() {
         if (logIn != null)
             logIn.clearErrorField();
+        loggedIn = true;
         Messenger messenger = new Messenger(manager);
         manager.goTo(messenger, AnimationType.SLIDE);
         roomId = "0";
@@ -128,8 +151,9 @@ public class Connector {
         //TODO
     }
 
-    private static void updateInterfaceColor() {
-        messenger.changeInterfaceColor(myColor);
+    public static void updateInterfaceColor() {
+        if (messenger != null)
+            messenger.changeInterfaceColor(myColor);
     }
 
     public static void displayMessage(String login, String message, String color) {
@@ -179,4 +203,32 @@ public class Connector {
         if (messenger != null)
             messenger.cleanMessageHistory();
     }
+
+    public static void connectionLost() {
+
+        if (!connected)
+           return;
+
+        if (DEBUG)
+            System.out.println("Канал закрылся");
+        Connector.dropAllTheConnection();
+        manager.goToFirst();
+    }
+
+    public static void exit() {
+        dropAllTheConnection();
+        factory.releaseExternalResources();
+    }
+
+    public static void exeptionCaught(ExceptionEvent e) {
+        if (DEBUG)
+            System.out.println("Словил эксепшн");
+        e.getCause().printStackTrace();
+        manager.goToFirst();
+    }
+
+    public static void requestRoomsInfo() {
+        send(ClientMessage.requestRoomsInfoSend());
+    }
+
 }

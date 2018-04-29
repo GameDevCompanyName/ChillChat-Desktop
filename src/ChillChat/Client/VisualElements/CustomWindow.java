@@ -44,10 +44,7 @@ public class CustomWindow extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        primaryStage.setOnCloseRequest(event -> {
-            Connector.dropAllTheConnection();
-            undecorator.setFadeOutTransition();
-        });
+        primaryStage.setOnCloseRequest(event -> System.exit(0));
 
     }
 

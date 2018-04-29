@@ -1,5 +1,6 @@
 package ChillChat.Client.VisualElements.Utilites;
 
+import ChillChat.Client.Connector;
 import ChillChat.Client.VisualElements.Activities.Activity;
 import ChillChat.Client.VisualElements.CustomWindow;
 import ChillChat.Client.VisualElements.Utilites.AnimationType;
@@ -26,6 +27,7 @@ public class ActivityManager extends StackPane {
     }
 
     public void goTo(Activity activity, AnimationType animationType){
+
         if (lastActive != null){
             stack.push(lastActive);
             if (animationType.equals(AnimationType.SLIDE))
@@ -45,6 +47,7 @@ public class ActivityManager extends StackPane {
     }
 
     public void goBack(){
+
         if (lastActive != null){
             lastActive.slideToRight();
         }
@@ -54,6 +57,14 @@ public class ActivityManager extends StackPane {
             lastActive = stack.pop();
             lastActive.appearFromLeft();
         }
+
+    }
+
+    public void goToFirst() {
+        for (int i = 1; i < stack.size() - 1; i++){
+            stack.pop();
+        }
+        goBack();
     }
 
 }

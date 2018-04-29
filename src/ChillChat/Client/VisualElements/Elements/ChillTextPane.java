@@ -22,9 +22,10 @@ public class ChillTextPane extends StackPane {
     public ChillTextPane(Font font, Messenger messenger){
 
         this.setAlignment(Pos.BOTTOM_LEFT);
-        this.prefWidthProperty().bind(messenger.widthProperty().subtract(3));
+        this.prefWidthProperty().bind(messenger.widthProperty());
+        this.maxWidthProperty().bind(messenger.widthProperty());
 
-        textArea = new MyTextArea(messenger);
+        textArea = new MyTextArea(messenger, this);
         if (DEBUG){
             textArea.setStyle("-fx-border-color: red");
             this.setStyle("-fx-border-color: GREEN");
@@ -32,14 +33,21 @@ public class ChillTextPane extends StackPane {
         textArea.setFont(font);
 
         backRect = new Rectangle();
-        backRect.widthProperty().bind(messenger.widthProperty().subtract(3));
+        backRect.widthProperty().bind(messenger.widthProperty().subtract(13));
+
+//        backRect.setWidth(textArea.getWidth());
+//        this.widthProperty().addListener(e -> {
+//            if (this.getWidth() < backRect.getWidth() - 2)
+//                backRect.setWidth(messenger.getWidth() - 3);
+//        });
 
         textArea.heightProperty().addListener(e -> {
             smoothResizeRectangle();
         });
-        backRect.setArcHeight(50);
-        backRect.setArcWidth(50);
-        backRect.setFill(Color.rgb(10, 10, 25, 0.8));
+
+        backRect.setArcHeight(40);
+        backRect.setArcWidth(40);
+        backRect.setFill(Color.rgb(15, 15, 30));
 
         this.getChildren().addAll(backRect, textArea);
 

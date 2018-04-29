@@ -8,4 +8,14 @@ public class Settings extends Activity {
         super(activityManager);
     }
 
+    @Override
+    public void onCall() {
+
+    }
+
+    @Override
+    public void onClose() {
+
+    }
+
 }

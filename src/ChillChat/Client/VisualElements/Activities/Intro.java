@@ -80,4 +80,15 @@ public class Intro extends Activity {
 
         fadeIn.play();
     }
+
+    @Override
+    public void onCall() {
+        //NOTHING
+    }
+
+    @Override
+    public void onClose() {
+        //NOTHING
+    }
+
 }
