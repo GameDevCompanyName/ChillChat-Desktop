@@ -33,13 +33,11 @@ public class ChillTextPane extends StackPane {
         textArea.setFont(font);
 
         backRect = new Rectangle();
-        backRect.widthProperty().bind(messenger.widthProperty().subtract(13));
 
-//        backRect.setWidth(textArea.getWidth());
-//        this.widthProperty().addListener(e -> {
-//            if (this.getWidth() < backRect.getWidth() - 2)
-//                backRect.setWidth(messenger.getWidth() - 3);
-//        });
+        messenger.widthProperty().addListener(e -> {
+            resizeField(messenger);
+        });
+        //backRect.widthProperty().bind(this.widthProperty().subtract(13));
 
         textArea.heightProperty().addListener(e -> {
             smoothResizeRectangle();
@@ -50,7 +48,24 @@ public class ChillTextPane extends StackPane {
         backRect.setFill(Color.rgb(15, 15, 30));
 
         this.getChildren().addAll(backRect, textArea);
+        //this.getChildren().addAll(textArea);
 
+    }
+
+    private void resizeField(Messenger messenger) {
+        Timeline resize = new Timeline();
+
+        resize.getKeyFrames().addAll(
+                new KeyFrame(Duration.seconds(0.0), new KeyValue(backRect.widthProperty(), backRect.getWidth())),
+                new KeyFrame(Duration.seconds(0.0), new KeyValue(textArea.prefWidthProperty(), textArea.getWidth()))
+        );
+
+        resize.getKeyFrames().addAll(
+                new KeyFrame(Duration.seconds(0.001), new KeyValue(backRect.widthProperty(), messenger.getWidth() - 25)),
+                new KeyFrame(Duration.seconds(0.001), new KeyValue(textArea.prefWidthProperty(), messenger.getWidth() - 20))
+        );
+
+        resize.play();
     }
 
     private void smoothResizeRectangle() {

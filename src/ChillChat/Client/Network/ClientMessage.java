@@ -1,5 +1,7 @@
 package ChillChat.Client.Network;
 
+import ChillChat.Client.Utils;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -76,6 +78,19 @@ public class ClientMessage {
                         incomingMessage.get("login").toString()
                 );
                 break;
+            case "roomIds":
+                JSONArray array = (JSONArray) incomingMessage.get("roomIds");
+                String[] ids = Utils.jsonArrayToStringArray(array);
+                ClientMethods.roomIdsRecieved(
+                        ids
+                );
+                break;
+            case "roomInfo":
+                ClientMethods.roomInfoRecieved(
+                        incomingMessage.get("roomId").toString(),
+                        incomingMessage.get("roomName").toString(),
+                        incomingMessage.get("roomPeople").toString()
+                );
             case "ping":
                 ClientMethods.serverPingRequest();
                 break;

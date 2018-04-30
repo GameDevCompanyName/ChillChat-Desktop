@@ -3,6 +3,7 @@ package ChillChat.Client;
 import ChillChat.Client.Network.ClientMessage;
 import ChillChat.Client.Network.Handler;
 import ChillChat.Client.VisualElements.Activities.Messenger;
+import ChillChat.Client.VisualElements.Activities.RoomChanger;
 import ChillChat.Client.VisualElements.Activities.Settings;
 import ChillChat.Client.VisualElements.Utilites.ActivityManager;
 import ChillChat.Client.VisualElements.Activities.LogIn;
@@ -37,6 +38,7 @@ public class Connector {
     public static ActivityManager manager;
     public static Messenger messenger;
     public static LogIn logIn;
+    public static RoomChanger roomChanger;
     public static Settings settings;
 
     private static void send(String msg) {
@@ -231,4 +233,15 @@ public class Connector {
         send(ClientMessage.requestRoomsInfoSend());
     }
 
+    public static void roomIdsRecieved(String[] roomIds) {
+        if (roomChanger != null){
+            roomChanger.addCards(roomIds);
+        }
+    }
+
+    public static void roomInfoRecieved(String id, String name, String people) {
+        if (roomChanger != null){
+            roomChanger.cardInfo(id, name, people);
+        }
+    }
 }

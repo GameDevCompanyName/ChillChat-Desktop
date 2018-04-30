@@ -43,14 +43,18 @@ public class CustomConsole {
 
         Message.setParentNode(textBox);
 
+        mainBox.widthProperty().addListener(e -> {
+            changeScrollPaneSize();
+        });
+
         textBox.setPadding(new Insets(13));
         textBox.setSpacing(5);
         textBox.prefWidthProperty().bind(Connector.messenger.widthProperty());
 
         mainBox.prefHeightProperty().bind(Connector.messenger.heightProperty().subtract(inputField.heightProperty()));
         mainBox.prefWidthProperty().bind(Connector.messenger.widthProperty());
-        mainBox.maxHeightProperty().bind(Connector.messenger.heightProperty().subtract(inputField.heightProperty()));
-        mainBox.maxWidthProperty().bind(Connector.messenger.widthProperty());
+        //mainBox.maxHeightProperty().bind(Connector.messenger.heightProperty().subtract(inputField.heightProperty()));
+        //mainBox.maxWidthProperty().bind(Connector.messenger.widthProperty());
 
         if (DEBUG)
             mainBox.setStyle("-fx-border-color: red");
@@ -66,13 +70,16 @@ public class CustomConsole {
 
         scrollPane.setBackground(Background.EMPTY);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         scrollPane.setFitToWidth(true);
         scrollPane.setStyle("-fx-background-color: transparent;\n" +
                 "-fx-background: transparent;");
 
         mainBox.getChildren().addAll(scrollPane);
 
+    }
+
+    private void changeScrollPaneSize() {
     }
 
     private void slowScrollToBottom() {

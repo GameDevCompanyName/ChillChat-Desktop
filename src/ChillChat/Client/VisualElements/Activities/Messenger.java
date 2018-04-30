@@ -60,13 +60,6 @@ public class Messenger extends Activity {
         textBlur = new GaussianBlur();
         textBlur.setRadius(0.0);
 
-//        Font inputFieldFont = null;
-//        try {
-//            inputFieldFont = Font.loadFont(new FileInputStream(new File("resources/commonFont.ttf")), 16);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-
         Font inputFieldFont = new Font("Courier New", 14);
 
         textBlur.setInput(textGlow);

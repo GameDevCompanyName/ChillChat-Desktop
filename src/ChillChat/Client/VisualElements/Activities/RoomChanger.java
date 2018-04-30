@@ -10,17 +10,22 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.Glow;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.util.Duration;
 
-import static ChillChat.Client.Constants.MESSAGE_CLICK_ANIMATION_TIME;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class RoomChanger extends Activity {
+
+    TilePane roomCards;
+    ScrollPane scrollRooms;
+    Map<String, RoomCard> cards;
 
     public RoomChanger(ActivityManager activityManager) {
         super(activityManager);
@@ -30,61 +35,55 @@ public class RoomChanger extends Activity {
         Glow glow = new Glow();
         glow.setLevel(0.7);
 
-        HBox roomCards = new HBox();
-        roomCards.setSpacing(20);
-        RoomCard main = new RoomCard("0");
-        RoomCard besedka = new RoomCard("1");
-        RoomCard huilka = new RoomCard("balalaika");
-        roomCards.getChildren().addAll(
-                main, besedka, huilka
-        );
+        scrollRooms = new ScrollPane();
+        scrollRooms.prefWidthProperty().bind(this.widthProperty());
+        scrollRooms.maxWidthProperty().bind(this.widthProperty());
+        scrollRooms.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        main.setInfo("ГЛАВНАЯ", 13843);
-        besedka.setInfo("Беседка", 18);
+        roomCards = new TilePane();
+        roomCards.setEffect(glow);
+        roomCards.setTileAlignment(Pos.TOP_CENTER);
+        roomCards.setHgap(20);
+        roomCards.setVgap(20);
 
-//        VBox roomButtons = new VBox();
-//        roomButtons.setAlignment(Pos.CENTER);
-//        roomButtons.setEffect(glow);
-//        roomButtons.setOpacity(0.97);
-//        roomButtons.setSpacing(20);
-//        roomButtons.getChildren().add(createRoomButton("0", "Главная"));
-//        roomButtons.getChildren().add(createRoomButton("1", "Беседка"));
-//        roomButtons.getChildren().add(createRoomButton("2", "АФК"));
+        roomCards.maxWidthProperty().bind(scrollRooms.widthProperty());
+        scrollRooms.setContent(roomCards);
+        this.getChildren().add(scrollRooms);
 
-        this.getChildren().add(roomCards);
+        cards = new HashMap<>();
+
     }
 
     @Override
     public void onCall() {
+        Connector.roomChanger = this;
         Connector.requestRoomsInfo();
     }
 
     @Override
     public void onClose() {
-
+        //Connector.roomChanger = null;
     }
 
-    private Node createRoomButton(String roomId, String roomName) {
-        Button button = new Button();
-        button.setText(roomName);
-        button.setPrefSize(200, 80);
-        button.setFont(new Font("Century Gothic", 34));
-        button.setBackground(Background.EMPTY);
-
-        button.setTextFill(Color.web("#3540db"));
-        button.setStyle("-fx-border-color: #3540db");
-
-        button.setOnMouseEntered(event -> {
-            button.setTextFill(Color.web("#ce3f81"));
-            button.setStyle("-fx-border-color: #ce3f81");
-        });
-        button.setOnMouseExited(event -> {
-            button.setTextFill(Color.web("#3540db"));
-            button.setStyle("-fx-border-color: #3540db");
-        });
-
-        return button;
+    public void addCards(String[] roomIds) {
+        for (String id: roomIds){
+            addCard(id);
+        }
     }
 
+    private void addCard(String id) {
+
+        System.out.println(id);
+        RoomCard card = new RoomCard(id);
+        cards.put(id, card);
+        roomCards.getChildren().add(card);
+    }
+
+    public void cardInfo(String id, String name, String people) {
+        if (id.equals("3") || id.equals("2"))
+            return;
+        System.out.println(id);
+        cards.get(id).setInfo(name, people);
+    }
 
 }

@@ -1,6 +1,7 @@
 package ChillChat.Client.Network;
 
 import ChillChat.Client.Connector;
+import javafx.application.Platform;
 
 public class ClientMethods {
 
@@ -72,4 +73,15 @@ public class ClientMethods {
     public static void serverPingRequest() {
         Connector.sendPong();
     }
+
+    public static void roomIdsRecieved(String[] roomIds) {
+        Connector.roomIdsRecieved(roomIds);
+    }
+
+    public static void roomInfoRecieved(String id, String name, String people) {
+        Platform.runLater(() -> {
+            Connector.roomInfoRecieved(id, name, people);
+        });
+    }
+
 }

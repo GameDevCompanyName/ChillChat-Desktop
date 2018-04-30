@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 
 import static ChillChat.Client.Constants.DEBUG;
@@ -25,15 +26,15 @@ public class RoomCard extends StackPane {
     static String defaultColor = "#888888";
     static String passiveColor = "";
     static String activeColor = "#FFFFFF";
-    static Font nameFont = new Font("Century Gothic", 26);
-    static Font peopleFont = new Font("Century Gothic", 20);
+    static Font nameFont = new Font("Century Gothic", 25);
+    static Font peopleFont = new Font("Century Gothic", 19);
     //static Font descriptionFont = new Font("Century Gothic", 12);
 
     private int H = 240;
     private int W = 160;
 
     private String name;
-    private int people;
+    private String people;
     private String roomId;
 
     private Rectangle background;
@@ -63,6 +64,8 @@ public class RoomCard extends StackPane {
         nameLabel = new Label("ИМЯ");
         nameLabel.setFont(nameFont);
         nameLabel.setTextFill(Color.web(defaultColor));
+        nameLabel.setWrapText(true);
+        nameLabel.setTextAlignment(TextAlignment.CENTER);
 
         peopleLabel = new Label("0/0");
         peopleLabel.setFont(peopleFont);
@@ -84,13 +87,13 @@ public class RoomCard extends StackPane {
 
     }
 
-    public void setInfo(String name, int people){
+    public void setInfo(String name, String people){
         this.setOpacity(1.0);
         this.name = name;
         this.people = people;
 
         nameLabel.setText(name);
-        peopleLabel.setText(Integer.toString(people) + "/∞");
+        peopleLabel.setText(people + "/∞");
 
         nameLabel.setTextFill(Color.web(activeColor));
         peopleLabel.setTextFill(Color.web(activeColor));
@@ -100,10 +103,10 @@ public class RoomCard extends StackPane {
         Timeline clickedAnimation = new Timeline();
 
         clickedAnimation.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(node.scaleXProperty(), 1.0)));
-        clickedAnimation.getKeyFrames().add(new KeyFrame(Duration.seconds(MESSAGE_CLICK_ANIMATION_TIME/4), new KeyValue(node.scaleXProperty(), 0.965)));
+        clickedAnimation.getKeyFrames().add(new KeyFrame(Duration.seconds(MESSAGE_CLICK_ANIMATION_TIME/4), new KeyValue(node.scaleXProperty(), 0.9)));
         clickedAnimation.getKeyFrames().add(new KeyFrame(Duration.seconds(MESSAGE_CLICK_ANIMATION_TIME), new KeyValue(node.scaleXProperty(), 1.0)));
         clickedAnimation.getKeyFrames().add(new KeyFrame(Duration.seconds(0.0), new KeyValue(node.scaleYProperty(), 1.0)));
-        clickedAnimation.getKeyFrames().add(new KeyFrame(Duration.seconds(MESSAGE_CLICK_ANIMATION_TIME/4), new KeyValue(node.scaleYProperty(), 0.965)));
+        clickedAnimation.getKeyFrames().add(new KeyFrame(Duration.seconds(MESSAGE_CLICK_ANIMATION_TIME/4), new KeyValue(node.scaleYProperty(), 0.9)));
         clickedAnimation.getKeyFrames().add(new KeyFrame(Duration.seconds(MESSAGE_CLICK_ANIMATION_TIME), new KeyValue(node.scaleYProperty(), 1.0)));
 
         clickedAnimation.playFromStart();

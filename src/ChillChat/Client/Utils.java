@@ -1,6 +1,7 @@
 package ChillChat.Client;
 
 import javafx.scene.image.Image;
+import org.json.simple.JSONArray;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -60,4 +61,8 @@ public class Utils {
         return Integer.parseInt(PORT);
     }
 
+    public static String[] jsonArrayToStringArray(JSONArray array) {
+        String string = array.toString().substring(1, array.toString().length() - 1);
+        return string.split(",");
+    }
 }
